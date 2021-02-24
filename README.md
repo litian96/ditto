@@ -12,11 +12,11 @@ Theoretically, we  analyze the ability of Ditto to achieve
 fairness and robustness simultaneously on a class of linear problems.
 Empirically, across a suite of federated datasets, we show that Ditto not only achieves competitive performance relative to recent personalization methods, but also enables more accurate, robust, and fair models relative to state-of-the-art fair or robust baselines.
 
---
 
-### We also have [Pytorch implementation]()
 
---
+### *We also provide [Pytorch implementation]()*
+
+
 
 ## Preparation
 
