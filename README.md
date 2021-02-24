@@ -1,3 +1,5 @@
+<img width="200" height="150" src="https://user-images.githubusercontent.com/14993256/109053987-54418f80-76ab-11eb-98bd-2c119d8a61ce.gif">
+
 # Ditto: Fair and Robust Federated Learning Through Personalization
 
 This repository contains the code and experiments for the manuscript:
