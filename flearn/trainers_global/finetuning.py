@@ -28,11 +28,9 @@ class Server(BaseFedarated):
                 if self.dataset == 'celeba':
                     c.train_data['y'] = 1 - c.train_data['y']
                 elif self.dataset == 'femnist':
-                    for i in range(len(c.train_data['y'])):
-                        c.train_data['y'][i] = np.random.randint(0, 62)  # [0, 62)
+                    c.train_data['y'] = np.random.randint(0, 62, len(c.train_data['y']))  # [0, 62)
                 elif self.dataset == 'fmnist': # fashion mnist
-                    for i in range(len(c.train_data['y'])):
-                        c.train_data['y'][i] = np.random.randint(0, 10)
+                    c.train_data['y'] = np.random.randint(0, 10, len(c.train_data['y']))
 
 
             if self.dataset == 'celeba':
