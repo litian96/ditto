@@ -28,7 +28,7 @@ class Server(BaseFedarated):
                 if self.dataset == 'celeba':
                     c.train_data['y'] = 1 - c.train_data['y']
                 elif self.dataset == 'femnist':
-                    c.train_data['y'][i] = np.random.randint(0, 62, len(c.train_data['y']))  # [0, 62)
+                    c.train_data['y'] = np.random.randint(0, 62, len(c.train_data['y']))  # [0, 62)
 
             if self.dataset == 'celeba':
                 batches[c] = gen_batch_celeba(c.train_data, self.batch_size, self.num_rounds * self.local_iters)
