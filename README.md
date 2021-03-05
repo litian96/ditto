@@ -16,7 +16,7 @@ Empirically, across a suite of federated datasets, we show that Ditto not only a
 
 
 
-### *We also provide [Pytorch implementation]()*
+### *We also provide [Pytorch implementation](https://github.com/s-huu/Ditto)*
 
 
 
