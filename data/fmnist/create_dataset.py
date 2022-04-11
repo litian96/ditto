@@ -59,7 +59,7 @@ def generate_dataset():
 
 
 def main():
-
+    print("Main")
 
     NUM_USER = 500
 

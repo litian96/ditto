@@ -23,6 +23,8 @@ class Server(BaseFedarated):
     def __init__(self, params, learner, dataset):
         print('Using global-regularized multi-task learning to Train')
         self.inner_opt = tf.train.GradientDescentOptimizer(params['learning_rate'])
+        # self.inner_opt = tf.train.FtrlOptimizer(params['learning_rate'])
+
         super(Server, self).__init__(params, learner, dataset)
 
     def train(self):
@@ -99,10 +101,14 @@ class Server(BaseFedarated):
                         model_best = copy.deepcopy(self.local_models[idx])
                         tmp_loss = 10000
                         # pick a lambda locally based on validation data
-                        for lam_id, candidate_lam in enumerate([0.1, 1, 2]):
+                        # x = [x / 10 for x in range(1, 21, 1)]  # increase time complexity to get better lambda
+                        # [0.1, 1, 2]
+                        for lam_id, candidate_lam in enumerate([x / 10 for x in range(1, 21, 1)]):
+                        # for lam_id, candidate_lam in enumerate([0.1, 1, 2]):  # orig
                             for layer in range(len(grads[1])):
                                 eff_grad = grads[1][layer] + candidate_lam * (self.local_models[idx][layer] - self.global_model[layer])
-                                model_tmp[layer] = self.local_models[idx][layer] - self.learning_rate * eff_grad
+                                model_tmp[layer] = self.local_models[idx][layer] - 0.025 * eff_grad
+                                # model_tmp[layer] = self.local_models[idx][layer] - self.learning_rate * eff_grad  # orig
 
                             c.set_params(model_tmp)
                             l = c.get_val_loss()
