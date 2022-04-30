@@ -96,6 +96,9 @@ class Server(BaseFedarated):
 
 
                     if self.dynamic_lam:
+                        upper_lambda = 40
+                        step_size = 1
+                        client_side_learning = .001
 
                         model_tmp = copy.deepcopy(self.local_models[idx])
                         model_best = copy.deepcopy(self.local_models[idx])
@@ -103,12 +106,15 @@ class Server(BaseFedarated):
                         # pick a lambda locally based on validation data
                         # x = [x / 10 for x in range(1, 21, 1)]  # increase time complexity to get better lambda
                         # [0.1, 1, 2]
-                        for lam_id, candidate_lam in enumerate([x / 10 for x in range(1, 21, 1)]):
-                        # for lam_id, candidate_lam in enumerate([0.1, 1, 2]):  # orig
+
+                        for lam_id, candidate_lam in enumerate([x / 10 for x in range(1, upper_lambda, step_size)]):
+                        # for lam_id, candidate_lam in enumerate([0.1, 1, 2]):  # Paper's Solution
                             for layer in range(len(grads[1])):
                                 eff_grad = grads[1][layer] + candidate_lam * (self.local_models[idx][layer] - self.global_model[layer])
-                                model_tmp[layer] = self.local_models[idx][layer] - 0.025 * eff_grad
-                                # model_tmp[layer] = self.local_models[idx][layer] - self.learning_rate * eff_grad  # orig
+                                model_tmp[layer] = self.local_models[idx][layer] - client_side_learning * eff_grad
+
+                                # Paper's Solution
+                                # model_tmp[layer] = self.local_models[idx][layer] - self.learning_rate * eff_grad
 
                             c.set_params(model_tmp)
                             l = c.get_val_loss()

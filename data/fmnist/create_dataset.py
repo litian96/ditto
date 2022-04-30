@@ -33,8 +33,8 @@ def load_mnist(path, kind='train'):
 
 def generate_dataset():
 
-  X_train, y_train = load_mnist('data/train', kind='train')
-  X_test, y_test = load_mnist('data/test', kind='t10k')
+  X_train, y_train = load_mnist('data/train/', kind='train')
+  X_test, y_test = load_mnist('data/test/', kind='t10k')
 
 
   # some simple normalization

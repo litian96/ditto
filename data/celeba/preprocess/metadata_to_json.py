@@ -99,13 +99,17 @@ def write_json(json_data):
 
 
 def main():
+	print("Getting metadata")
 	identities, attributes = get_metadata()
+	print("Getting Celebrities and Images")
 	celebrities = get_celebrities_and_images(identities)
+	print("Getting Celebrities and Targets")
 	targets = get_celebrities_and_target(celebrities, attributes)
-
+	print("Building JSON")
 	json_data = build_json_format(celebrities, targets)
+	print("Write JSON")
 	write_json(json_data)
-
+	print("Done")
 
 if __name__ == '__main__':
 	main()

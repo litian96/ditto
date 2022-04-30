@@ -38,7 +38,7 @@ class Model(object):
         b = tf.Variable(tf.zeros([1]))
         y_pred = tf.matmul(features, W) + b
 
-        loss = 0.01 * tf.reduce_sum(tf.square(W)) + tf.reduce_mean(tf.maximum(tf.zeros_like(labels), 1 - labels * y_pred))
+        loss = 0.001 * tf.reduce_sum(tf.square(W)) + tf.reduce_mean(tf.maximum(tf.zeros_like(labels), 1 - labels * y_pred))
 
         grads_and_vars = optimizer.compute_gradients(loss)
         grads, _ = zip(*grads_and_vars)
